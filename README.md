@@ -14,6 +14,15 @@ Este script contiene los procedimientos almacenados que la aplicación utiliza p
 
 Asegúrate de ejecutar estos scripts en tu base de datos para tener las tablas y procedimientos almacenados necesarios para el correcto funcionamiento de DonGalleto.
 
+# Relacionados
+
+Esta base de datos está relacionada con el proyecto DonGalleto el cual consta de:
+
+- (https://github.com/SteamnGFX/DonGalleto_Web)[https://github.com/SteamnGFX/DonGalleto_Web] Repositorio WEB para el uso de API REST y HTML del proyecto. 
+- (https://github.com/SteamnGFX/DonGalleto_Core)[https://github.com/SteamnGFX/DonGalleto_Core] Repositorio Core para la comunicación y gestión de la lógica del proyecto.
+- (https://github.com/SteamnGFX/DonGalleto_Modelo)[https://github.com/SteamnGFX/DonGalleto_Modelo] Repositorio Modelo para el modelado de datos.
+
+
 # Contribuciones
 Si encuentras oportunidades de mejora en los scripts SQL o deseas agregar nuevas funcionalidades a la base de datos, eres bienvenido/a a contribuir al proyecto. Sigue los pasos de contribución descritos en el repositorio DonGalleto_Core.
 
