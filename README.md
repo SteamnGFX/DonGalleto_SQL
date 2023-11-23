@@ -6,10 +6,10 @@ Este repositorio, denominado DonGalleto_SQL, contiene los scripts SQL necesarios
 - StoreProcedures. Script que contiene los procedimientos almacenados necesarios para el funcionamiento del proyecto.
 
 ## Scripts SQL
-### Crear Tablas (tablas.sql)
+### Crear Tablas (1 Tablas.sql)
 Este script se encarga de crear las tablas necesarias para el correcto funcionamiento de DonGalleto. Asegúrate de ejecutar este script en tu base de datos antes de iniciar la aplicación.
 
-### Procedimientos Almacenados (stored_procedures.sql)
+### Procedimientos Almacenados (2 StoreProcedures.sql)
 Este script contiene los procedimientos almacenados que la aplicación utiliza para realizar operaciones específicas en la base de datos.
 
 Asegúrate de ejecutar estos scripts en tu base de datos para tener las tablas y procedimientos almacenados necesarios para el correcto funcionamiento de DonGalleto.
