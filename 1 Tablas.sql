@@ -1,4 +1,5 @@
-create database DonGalleto;
+DROP DATABASE IF EXISTS DonGalleto;
+CREATE DATABASE DonGalleto;
 
 use DonGalleto;
 
@@ -20,7 +21,8 @@ cantidad INT,
 nombre VARCHAR(255),
 descripcion VARCHAR(255),
 fotografia longtext,
-precio float
+precio float,
+peso float
 );
 
 create table Venta(
@@ -35,8 +37,22 @@ fecha VARCHAR(255) NOT NULL,
 FOREIGN KEY (idGalleta) REFERENCES inventario_galleta(id)
 );
 
-INSERT INTO inventario_galleta (cantidad, nombre, descripcion,fotografia,precio) VALUES
-(10, 'Galleta de chocolate', 'Galleta de chocolate con textura suave, relleno delicioso',"", "100"),
-(5, 'Galleta de fresa', 'Galleta de vainilla con textura suave, relleno delicioso',"","100"),
-(15, 'Galleta de hallowen', 'Galleta conmemorativa de hallowen',"","100");
+
+CREATE TABLE materiaPrima (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    nombre VARCHAR(100) NOT NULL,
+    cantidad DOUBLE NOT NULL,
+    unidad_medida VARCHAR(20) NOT NULL,
+    proveedor VARCHAR(100),
+    fecha_compra DATE,
+    precio_unitario DECIMAL(10, 2),
+    fotografia lONGTEXT,
+    CONSTRAINT ck_cantidad CHECK (cantidad >= 0),
+    CONSTRAINT ck_precio_unitario CHECK (precio_unitario >= 0)
+);
+
+INSERT INTO inventario_galleta (cantidad, nombre, descripcion,fotografia,precio,peso) VALUES
+(10, 'Galleta de chocolate', 'Galleta de chocolate con textura suave, relleno delicioso',"", "100","5"),
+(5, 'Galleta de fresa', 'Galleta de vainilla con textura suave, relleno delicioso',"","100","5"),
+(15, 'Galleta de hallowen', 'Galleta conmemorativa de hallowen',"","100","10");
     
