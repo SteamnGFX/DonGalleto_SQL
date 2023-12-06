@@ -10,9 +10,13 @@ BEGIN
     DECLARE usuario_encontrado INT;
     
     -- Verificar si las credenciales coinciden
-    SELECT COUNT(*) INTO usuario_encontrado
-    FROM usuarios
-    WHERE nombre_usuario = p_usuario AND contrasenia = p_contrasenia;
+SELECT 
+    COUNT(*)
+INTO usuario_encontrado FROM
+    usuarios
+WHERE
+    nombre_usuario = p_usuario
+        AND contrasenia = p_contrasenia;
 
     -- Devolver el resultado
     IF usuario_encontrado > 0 THEN
@@ -36,11 +40,12 @@ CREATE PROCEDURE InsertarGalleta(
     IN p_descripcion VARCHAR(255),
     IN p_fotografia LONGTEXT,
     iN p_precio FLOAT,
+    iN p_peso FLOAT,
     OUT p_id_generado INT
 )
 BEGIN
-    INSERT INTO inventario_galleta (cantidad, nombre, descripcion, fotografia, precio)
-    VALUES (p_cantidad, p_nombre, p_descripcion, p_fotografia, p_precio);
+    INSERT INTO inventario_galleta (cantidad, nombre, descripcion, fotografia, precio,peso)
+    VALUES (p_cantidad, p_nombre, p_descripcion, p_fotografia, p_precio, p_peso);
 
     -- Obtener el ID generado y asignarlo al parámetro de salida
     SET p_id_generado = LAST_INSERT_ID();
@@ -55,7 +60,8 @@ CREATE PROCEDURE ActualizarGalleta(
     IN p_nombre VARCHAR(255),
     IN p_descripcion VARCHAR(255),
     IN p_fotografia LONGTEXT,
-    IN p_precio FLOAT
+    IN p_precio FLOAT,
+    IN p_peso FLOAT
 )
 BEGIN
     UPDATE inventario_galleta
@@ -64,7 +70,8 @@ BEGIN
         nombre = p_nombre,
         descripcion = p_descripcion,
         fotografia = p_fotografia,
-        precio = p_precio
+        precio = p_precio,
+        peso = p_peso
     WHERE id = p_id_galleta;
 END //
 DELIMITER ;
@@ -117,5 +124,64 @@ BEGIN
     UPDATE inventario_galleta
     SET cantidad = galletaCantidad - NEW.cantidad
     WHERE id = NEW.idGalleta;
+END //
+DELIMITER ;
+
+-- StoreProcedure de insertar materia 
+DELIMITER //
+CREATE PROCEDURE insertarMateria(
+    IN p_cantidad Double,
+    IN p_nombre VARCHAR(255),
+    IN p_unidadMedida VARCHAR(255),
+    IN p_proveedor varchar (15),
+    IN p_precio_unitario double,
+    IN p_fecha_compra date,
+    IN p_fotografia LONGTEXT,
+    OUT p_id_generado INT
+)
+BEGIN
+	INSERT INTO materiaPrima (nombre, cantidad, unidad_medida, proveedor, fecha_compra, precio_unitario, fotografia)
+    VALUES (p_nombre, p_cantidad, p_unidadMedida, p_proveedor, p_fecha_compra, p_precio_unitario,  p_fotografia);
+
+    -- Obtener el ID generado y asignarlo al parámetro de salida
+    SET p_id_generado = LAST_INSERT_ID();
+END //
+DELIMITER ;
+-- StoreProcedure de actualizar materia 
+
+DELIMITER //
+CREATE PROCEDURE modificarMateria(
+    IN p_id INT,
+    IN p_cantidad Double,
+    IN p_nombre VARCHAR(255),
+    IN p_unidadMedida VARCHAR(255),
+    IN p_proveedor varchar (15),
+    IN p_precio_unitario double,
+    IN p_fecha_compra date,
+    IN p_fotografia LONGTEXT
+)
+BEGIN
+    UPDATE materiaPrima
+    SET
+        cantidad = p_cantidad,
+        nombre = p_nombre,
+        unidad_medida = p_unidadMedida,
+        proveedor = p_proveedor,
+        precio_unitario = p_precio_unitario,
+        fecha_compra = p_fecha_compra,
+        fotografia = p_fotografia
+    WHERE
+        id = p_id;
+END //
+DELIMITER ;
+-- StoreProcedure de eliminar materia 
+
+DELIMITER //
+CREATE PROCEDURE eliminarMateria(
+    IN p_id INT
+)
+BEGIN
+    DELETE FROM materiaPrima
+    WHERE id = p_id;
 END //
 DELIMITER ;
